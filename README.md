@@ -34,6 +34,18 @@ If you want to change this behaviour, add `config/initializes/graphql_logger.rb`
   }
 ```
 
+## Configuration
+
+There is an option to suppress (hide) the GraphQL Introspection Query from the console output. This may be helpful to declutter the console during client testing as these can be rather lengthy.
+
+`config/initializers/graphql_rails_logger.rb`
+
+```ruby
+GraphQL::RailsLogger.configure do |config|
+  config.skip_introspection_query = true
+end
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/jetruby/graphql-rails_logger. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.

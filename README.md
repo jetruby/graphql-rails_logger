@@ -23,22 +23,20 @@ And then execute:
 
     $ bundle
 
-## Usage
+## Configuration
 
 By default this gem formats params only for `GraphqlController#execute`.
 
-If you want to change this behaviour, add `config/initializes/graphql_logger.rb` file and set proper controller and actions like this:
+If you want to change this behaviour, add `config/initializers/graphql_rails_logger.rb` file and set proper controller and actions like this:
 ```ruby
-  Rails.application.config.graphql_logger = {
+GraphQL::RailsLogger.configure do |config|
+  config.white_list = {
     'QueriesController' => %w(create)
   }
+end
 ```
 
-## Configuration
-
 There is an option to suppress (hide) the GraphQL Introspection Query from the console output. This may be helpful to declutter the console during client testing as these can be rather lengthy.
-
-`config/initializers/graphql_rails_logger.rb`
 
 ```ruby
 GraphQL::RailsLogger.configure do |config|

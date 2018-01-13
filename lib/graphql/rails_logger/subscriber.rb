@@ -29,7 +29,7 @@ module GraphQL
 
         info "Processing by #{payload[:controller]}##{payload[:action]} as #{format}"
 
-        if Rails.application.config.graphql_logger.fetch(payload[:controller], []).include?(payload[:action])
+        if config.white_list.fetch(payload[:controller], []).include?(payload[:action])
           formatter = Rouge::Formatters::Terminal256.new
           query_lexer = Rouge::Lexers::GraphQL.new
           variables_lexer = Rouge::Lexers::Ruby.new

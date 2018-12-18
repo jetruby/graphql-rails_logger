@@ -28,6 +28,7 @@ And then execute:
 By default this gem formats params only for `GraphqlController#execute`.
 
 If you want to change this behaviour, add `config/initializers/graphql_rails_logger.rb` file and set proper controller and actions like this:
+
 ```ruby
 GraphQL::RailsLogger.configure do |config|
   config.white_list = {
@@ -41,6 +42,14 @@ There is an option to suppress (hide) the GraphQL Introspection Query from the c
 ```ruby
 GraphQL::RailsLogger.configure do |config|
   config.skip_introspection_query = true
+end
+```
+
+The theme can be configured as well.  The theme is applied using the [rouge](https://github.com/jneen/rouge) gem, where all available options can be found.  The default value is `Rouge::Themes::ThankfulEyes.new`.
+
+```ruby
+GraphQL::RailsLogger.configure do |config|
+  config.theme = Rouge::Themes::Pastie.new
 end
 ```
 

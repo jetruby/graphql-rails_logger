@@ -1,6 +1,7 @@
 require 'graphql/rails_logger/configuration'
 require 'action_controller/log_subscriber'
 require 'rouge'
+require 'pp'
 
 module GraphQL
   module RailsLogger

@@ -39,14 +39,29 @@ module GraphQL
 
             next if config.skip_introspection_query && data['query'].index(/query IntrospectionQuery/)
 
-            query = data['query'].lines.map { |line| "  #{line}" }.join.chomp # add indentation
-            variables = PP.pp(data['variables'] || {}, '')
-            info "  Variables: #{formatter.format(variables_lexer.lex(variables))}"
-            info formatter.format(query_lexer.lex(query))
+            # Cleanup and indent params for logging
+            query = indent(data.fetch('query', ''))
+            variables = indent(pretty(data.fetch('variables', '')))
+
+            info "\nVariables:\n#{formatter.format(variables_lexer.lex(variables))}" if variables.present?
+            info "\nQuery:\n#{formatter.format(query_lexer.lex(query))}" if query.present?
           end
         else
-          info "  Parameters: #{params.inspect}" unless params.empty?
+          info "\nParameters:\n#{params.inspect}" unless params.empty?
         end
+      end
+
+      private
+
+      def indent(data)
+        data.lines.map { |line| "  #{line}" }.join.chomp
+      end
+
+      def pretty(data)
+        return '' if data.blank?
+
+        data = JSON.parse(data) if data.is_a?(String)
+        PP.pp(data, '')
       end
     end
   end

@@ -35,16 +35,18 @@ module GraphQL
           query_lexer = Rouge::Lexers::GraphQL.new
           variables_lexer = Rouge::Lexers::Ruby.new
 
-          (params['_json'] || [params.slice('query', 'variables')]).each do |data|
+          (params['_json'] || [params.slice('query', 'variables', 'extensions')]).each do |data|
 
             next if config.skip_introspection_query && data['query'].index(/query IntrospectionQuery/)
 
             # Cleanup and indent params for logging
             query = indent(data.fetch('query', ''))
             variables = indent(pretty(data.fetch('variables', '')))
+            extensions = indent(pretty(data.fetch('extensions', '')))
 
             info "\nVariables:\n#{formatter.format(variables_lexer.lex(variables))}" if variables.present?
             info "\nQuery:\n#{formatter.format(query_lexer.lex(query))}" if query.present?
+            info "\nExtensions:\n#{formatter.format(variables_lexer.lex(extensions))}" if extensions.present?
           end
         else
           info "\nParameters:\n#{params.inspect}" unless params.empty?

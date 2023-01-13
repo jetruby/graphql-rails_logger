@@ -37,7 +37,7 @@ module GraphQL
 
           (params['_json'] || [params.slice('query', 'variables', 'extensions')]).each do |data|
 
-            next if config.skip_introspection_query && data['query'].index(/query IntrospectionQuery/)
+            next if config.skip_introspection_query && data['query']&.index(/query IntrospectionQuery/)
 
             # Cleanup and indent params for logging
             query = indent(data.fetch('query', ''))

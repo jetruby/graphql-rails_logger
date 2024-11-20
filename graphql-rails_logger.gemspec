@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'rouge', '~> 3.0'
+  spec.add_dependency 'rouge', '>= 3.0'
 
   # 5 because not tested with 4
   spec.add_dependency 'actionpack', '> 5.0'

@@ -18,13 +18,13 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'rouge', '~> 3.0'
+  spec.add_dependency 'rouge', '>= 3.0'
 
   # 5 because not tested with 4
   spec.add_dependency 'actionpack', '> 5.0'
   spec.add_dependency 'activesupport', '> 5.0'
   spec.add_dependency 'railties', '> 5.0'
 
-  spec.add_development_dependency 'bundler', '~> 1.15'
+  spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake', '~> 10.0'
 end
